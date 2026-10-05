@@ -1,5 +1,7 @@
-import { Formik,Form } from "formik";
+import { Formik,Form, Field } from "formik";
 import * as yup from 'yup';
+import PersonalError from "./PersonalError";
+import { ErrorMessage } from "formik";
 
 const initialValues={
     email:"",
@@ -12,7 +14,8 @@ const onSubmit=(values)=>{
 }
 
 const validationSchema=yup.object({
-    name:yup.string().required('لطفا این قسمت را پر کنید')
+    email:yup.string().required('this field is empty!').email('ایمیل صحیح نیست'),
+    password:yup.string().required('this field is empty!')
 })
 
 const Login=()=>{
@@ -37,19 +40,44 @@ const Login=()=>{
 
 
             <div>
-                <input type="email" name="email" placeholder="email" 
-                className="p-2  bg-gray-200 rounded-2xl hover:bg-gray-300 mb-3 " />
+                <Field 
+                type="email" 
+                name="email" 
+                className={ `w-full py-3 px-6 rounded-2xl border 
+                    focus:outline-none focus:ring-0 ${
+                    formik.errors.email && formik.touched.email ?
+                    "border-pink-500 bg-pink-50 placeholder-pink-400 placeholder:text-sm placeholder:font-bold" 
+                    : "bg-purple-200 border-purple-500"
+                }`} 
+                placeholder={
+                    formik.touched.email && formik.errors.email
+                    ? formik.errors.email
+                    : "email"
+
+                } 
+                />
             </div>
 
 
-            <div>
-                <input type="password" name="password" placeholder="password" 
-                className="p-2  bg-gray-200 rounded-2xl hover:bg-gray-300
-                alert-validate
-                {`validate-input ${formik.errors.password && Formik.touched.password ? 'alert-validate':null}`}" 
-                data-validate={formik.errors.password} />
-            </div>
+           <div>
+                <Field 
+                type="password" 
+                name="password" 
+                className={ `w-full py-3 px-6 rounded-2xl border mt-3 
+                    focus:outline-none focus:ring-0 ${
+                    formik.errors.password && formik.touched.password ?
+                    "border-pink-500 bg-pink-50 placeholder-pink-400 placeholder:text-sm placeholder:font-bold" 
+                    : "bg-purple-200 border-purple-500"
+                }`} 
+                placeholder={
+                    formik.touched.password && formik.errors.password
+                    ? formik.errors.password
+                    : "password"
 
+                } 
+                />
+            </div>
+ 
 
             <div className="flex items-center justify-center">
                 <button className="m-3 bg-purple-400 text-white font-bold py-2 px-5 rounded-2xl hover:bg-purple-500 active:bg-purple-600">
