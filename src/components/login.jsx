@@ -15,7 +15,15 @@ const onSubmit=(values)=>{
 
 const validationSchema=yup.object({
     email:yup.string().required('this field is empty!').email('ایمیل صحیح نیست'),
-    password:yup.string().required('this field is empty!')
+
+
+    password:yup
+    .string()
+    .required('this field is empty!')
+    .min(8,'password must be ateast 8 charcters long.')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+        "the password must contain uppercase and lowercase letters,numbers,and special characters."
+    )
 })
 
 const Login=()=>{
