@@ -1,7 +1,8 @@
 import { Formik,Form, Field } from "formik";
 import * as yup from 'yup';
-import PersonalError from "./PersonalError";
-import { ErrorMessage } from "formik";
+import { NavLink } from "react-router-dom";
+
+
 
 const initialValues={
     email:"",
@@ -51,7 +52,7 @@ const Login=()=>{
                 <Field 
                 type="email" 
                 name="email" 
-                className={ `w-full py-3 px-6 rounded-2xl border 
+                className={ `w-full py-3 px-6 rounded-2xl border-4 
                     focus:outline-none focus:ring-0 ${
                     formik.errors.email && formik.touched.email ?
                     "border-pink-500 bg-pink-50 placeholder-pink-400 placeholder:text-sm placeholder:font-bold" 
@@ -71,7 +72,7 @@ const Login=()=>{
                 <Field 
                 type="password" 
                 name="password" 
-                className={ `w-full py-3 px-6 rounded-2xl border mt-3 
+                className={ `w-full py-3 px-6 rounded-2xl border-4 mt-3 
                     focus:outline-none focus:ring-0 ${
                     formik.errors.password && formik.touched.password ?
                     "border-pink-500 bg-pink-50 placeholder-pink-400 placeholder:text-sm placeholder:font-bold" 
@@ -99,11 +100,20 @@ const Login=()=>{
                     forget password?
                 </a>
 
+
+             
                <div>
-                 <a href="#" className="text-lg text-gray-700 hover:underline">
-                    sign in</a>
-               </div>
+                 <NavLink to="/signIn" className="text-lg text-gray-700 hover:underline">
+                    sign in</NavLink>
+                </div>
             </div>
+
+                <div>
+                 <NavLink to="/realsignIn" className="text-lg text-gray-700 hover:underline">
+                    real sign in</NavLink>
+                </div>
+
+            
 
             </Form>
             )  
